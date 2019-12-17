@@ -1,6 +1,6 @@
 name = "3dfh"
 
-version = "1.6.13"
+version = "1.7.15"
 
 authors = [
     "DNA Research"
@@ -12,7 +12,7 @@ description = \
     """
 
 requires = [
-    "3delight_core-{version}".format(version=str(version)),
+    "3delight-{version}".format(version=str(version)),
     "cmake-3+",
     "houdini-17.5+<18.5"
 ]
@@ -29,4 +29,12 @@ with scope("config") as config:
 uuid = "3dfh-{version}".format(version=str(version))
 
 def commands():
-    env.HOUDINI_PATH.append("{root}/houdini/" + str(env.REZ_HOUDINI_MAJOR_VERSION) + "." + str(env.REZ_HOUDINI_MINOR_VERSION))
+    import os
+
+    env.HOUDINI_PACKAGE_DIR.append(
+        os.path.join(
+            str(env.REZ_3DELIGHT_ROOT),
+            "houdini",
+            str(env.REZ_HOUDINI_MAJOR_VERSION) + "." + str(env.REZ_HOUDINI_MINOR_VERSION),
+        )
+    )
